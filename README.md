@@ -7,3 +7,4 @@ Thise program will allow you check is the credit card number (CCN) is valid (is 
    In case of checking the non-provided's CCN program will show "Other" in line of owners
 ----------
 Note: thise program **doesn't** check is the CCN is perconalized, its only check is the CCN **can** be perconalized based on [Luhn's algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
+      It's fully recommended to run thise program in cs50 [Codespace](https://cs50.dev/) (check video file for help)
