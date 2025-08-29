@@ -49,7 +49,8 @@ int main(void)
         int current_num_digit = 0;
         int current_digit_pos = 0;
         int sum = 0;
-        char checker = 0;
+        int penultim_dig = 0;
+        int last_dig = 0;
         const int solid_len = card_num_len;
         LENGTHS[sycle] = card_num_len;
 
@@ -66,9 +67,13 @@ int main(void)
                 card_num_len--;
 
                 // Is thise last digit of card number
+                if ((solid_len - current_digit_pos) == 1)
+                {
+                    penultim_dig = current_num_digit;
+                }
                 if ((solid_len - current_digit_pos) == 0)
                 {
-                    checker = current_num_digit;
+                    last_dig = current_num_digit;
                 }
 
                 if (current_digit_pos % 2 == 0)
@@ -90,22 +95,23 @@ int main(void)
             if (sum % 10 == 0)
             {
                 VALIDATIONS[sycle] = "VALID";
-
-                if (checker == 5)
-                {
-                    OWNERS[sycle] = "Mastercard";
-                }
-                else if (checker == 4)
-                {
-                    OWNERS[sycle] = "Visa";
-                }
-                else if (checker == 3)
+                if (solid_len == 15 && (last_dig == 3  && (penultim_dig == 4 || penultim_dig == 7)))
                 {
                     OWNERS[sycle] = "American Exp.";
                 }
+                else if ((solid_len == 13 || solid_len == 16) && last_dig == 4)
+                {
+                    OWNERS[sycle] = "Visa";
+                }
+
+                else if (last_dig == 5 && (penultim_dig == 1 || penultim_dig == 2 || penultim_dig == 3 || penultim_dig == 4 || penultim_dig == 5))
+                {
+                    OWNERS[sycle] = "Mastercard";
+                }
                 else
                 {
-                    OWNERS[sycle] = "Other";
+                    VALIDATIONS[sycle] = "INVALID";
+                    OWNERS[sycle] = "-";
                 }
             }
             else
